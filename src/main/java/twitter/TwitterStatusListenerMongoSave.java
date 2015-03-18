@@ -24,22 +24,32 @@ public class TwitterStatusListenerMongoSave implements StatusListener {
 	
 	MongoDbConnector connector = null;
 	Thread thisThread = null;
+	TwitterStreamCollector collector = null;
 	public TwitterStatusListenerMongoSave(MongoDbConnector connector) {
 		this.connector = connector;
+	}
+	public TwitterStatusListenerMongoSave(MongoDbConnector connector, TwitterStreamCollector collector) {
+		this.connector = connector;
+		this.collector = collector;
 	}
     
 	
 	public void onException(Exception arg0) {
 		// TODO Auto-generated method stub
 		arg0.printStackTrace();
-		if (thisThread != null) {
-			try {
-				thisThread.sleep(1000*60*16);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		System.out.println("ON EXCEPTION");
+		TwitterException twitterException = (TwitterException) arg0;
+		int retryAfterSeconds = twitterException.getRetryAfter();
+		System.out.println(String.valueOf(retryAfterSeconds));
+		if (retryAfterSeconds > 0) {
+		collector.stopAndWait(retryAfterSeconds);
 		}
+		int errorCode = twitterException.getStatusCode();
+		if (errorCode == 420) {
+			System.out.println("ErrorCode 420");
+			collector.stopAndWait(900);
+		}
+		
 		
 	}
 
@@ -59,8 +69,6 @@ public class TwitterStatusListenerMongoSave implements StatusListener {
 	}
 
 	public void onStatus(Status arg0) {
-		// TODO Auto-generated method stub
-		arg0.getText();
 		Document tweetDoc = new Document();
 		tweetDoc.append("tweet", arg0.getText());
 		GeoLocation location =  arg0.getGeoLocation();
@@ -100,7 +108,7 @@ public class TwitterStatusListenerMongoSave implements StatusListener {
 		if (arg0.getSource()!= null) {
 			tweetDoc.put("source", arg0.getSource());
 		}
-		System.out.println(tweetDoc.toString());
+		//System.out.println(tweetDoc.toString());
 		connector.insert(tweetDoc, "tweet_dump");
 	    //System.out.println(arg0.toString());	
 	}
