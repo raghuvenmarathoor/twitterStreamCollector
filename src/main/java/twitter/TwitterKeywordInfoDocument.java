@@ -14,6 +14,7 @@ public class TwitterKeywordInfoDocument {
 	public static final String ADDITIONAL_INFO_FIELD_NAME = "add_info";
 	public static final String LAST_RUN_TIME_FIELD_NAME = "last_run_time";
 	public static final String OCCURANCES_FIELD_NAME = "occurances";
+	public static final String TWITTER_KEYWORD_COLLECTION_NAME = "keywords";
 	public int tweetCount = 0;
 	public boolean active = true;
 	public String val = "";

@@ -31,10 +31,10 @@ public class TweetDocument {
 	private List<Long> contributors = new ArrayList<Long>();
 	private List<String> hashtags = new ArrayList<String>();
 	private Date createdAt = null;
-	private Long favouriteCount = 0l;
+	private Integer favouriteCount = 0;
 	private Long id = -1l;
 	private Long inReplyToUserId = -1l;
-	private Long retweetCount = 0l;
+	private Integer retweetCount = 0;
 	private List<Long> userMentions = new ArrayList<Long>();
 	private String source = "";
 	private boolean processedStatus = false;
@@ -43,8 +43,8 @@ public class TweetDocument {
 		
 	}
 	public TweetDocument(String tweet, Long userId, List<Long> contributors,
-			List<String> hashtags, Date createdAt, Long favouriteCount,
-			Long id, Long inReplyToUserId, Long retweetCount,
+			List<String> hashtags, Date createdAt, Integer favouriteCount,
+			Long id, Long inReplyToUserId, Integer retweetCount,
 			List<Long> userMentions, String source, boolean processedStatus) {
 		super();
 		this.tweet = tweet;
@@ -139,7 +139,7 @@ public class TweetDocument {
 	/**
 	 * @return the favouriteCount
 	 */
-	public Long getFavouriteCount() {
+	public Integer getFavouriteCount() {
 		return favouriteCount;
 	}
 
@@ -147,7 +147,7 @@ public class TweetDocument {
 	 * @param favouriteCount
 	 *            the favouriteCount to set
 	 */
-	public void setFavouriteCount(Long favouriteCount) {
+	public void setFavouriteCount(Integer favouriteCount) {
 		this.favouriteCount = favouriteCount;
 	}
 
@@ -184,7 +184,7 @@ public class TweetDocument {
 	/**
 	 * @return the retweetCount
 	 */
-	public Long getRetweetCount() {
+	public Integer getRetweetCount() {
 		return retweetCount;
 	}
 
@@ -192,7 +192,7 @@ public class TweetDocument {
 	 * @param retweetCount
 	 *            the retweetCount to set
 	 */
-	public void setRetweetCount(Long retweetCount) {
+	public void setRetweetCount(Integer retweetCount) {
 		this.retweetCount = retweetCount;
 	}
 
@@ -252,7 +252,7 @@ public class TweetDocument {
     		tweetDocument.setCreatedAt(date);
     	}
     	if (keySet.contains(FAVOURITE_COUNT_FIELD_NAME)) {
-    		tweetDocument.setFavouriteCount(document.getLong(FAVOURITE_COUNT_FIELD_NAME));
+    		tweetDocument.setFavouriteCount(document.getInteger(FAVOURITE_COUNT_FIELD_NAME));
     	}
     	if (keySet.contains(HASHTAGS_FIELD_NAME)) {
     		tweetDocument.setHashtags((List<String>) document.get(HASHTAGS_FIELD_NAME));
@@ -267,7 +267,7 @@ public class TweetDocument {
     		tweetDocument.setProcessedStatus(document.getBoolean(PROCESSED_STATUS_FIELD_NAME));
     	}
     	if (keySet.contains(RETWEET_COUNT_FIELD_NAME)) {
-    		tweetDocument.setRetweetCount(document.getLong(RETWEET_COUNT_FIELD_NAME));
+    		tweetDocument.setRetweetCount(document.getInteger(RETWEET_COUNT_FIELD_NAME));
     	}
     	if (keySet.contains(SOURCE_FIELD_NAME)) {
     		tweetDocument.setSource(document.getString(SOURCE_FIELD_NAME));

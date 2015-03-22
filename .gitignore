@@ -1,2 +1,4 @@
 /target/
 /twitter4j.properties
+/disabled-twitter4j.properties
+/twitter-auth.xml

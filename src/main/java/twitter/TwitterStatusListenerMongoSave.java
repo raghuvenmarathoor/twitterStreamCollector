@@ -38,7 +38,9 @@ public class TwitterStatusListenerMongoSave implements StatusListener {
 		int errorCode = twitterException.getStatusCode();
 		if (errorCode == 420) {
 			System.out.println("ErrorCode 420");
-			collector.stopAndWait(900);
+			collector.setNextTwitterAccount();
+			System.out.println("Next account set");
+			collector.stopAndWait(5);
 		}
 	}
 
