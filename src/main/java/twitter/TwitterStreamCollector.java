@@ -12,7 +12,7 @@ import org.joda.time.DateTime;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCursor;
 
-import mongo.MongoDbConnector;
+import db.MongoDbConnector;
 import twitter4j.FilterQuery;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;

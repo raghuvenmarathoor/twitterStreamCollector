@@ -2,9 +2,9 @@ package twitter;
 
 import java.util.List;
 
-import mongo.MongoDbConnector;
-
 import org.bson.Document;
+
+import db.MongoDbConnector;
 
 public class TweetProcessor {
 	

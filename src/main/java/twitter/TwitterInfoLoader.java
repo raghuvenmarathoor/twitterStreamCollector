@@ -6,7 +6,7 @@ import org.bson.Document;
 
 import com.mongodb.MongoClient;
 
-import mongo.MongoDbConnector;
+import db.MongoDbConnector;
 
 public class TwitterInfoLoader {
 

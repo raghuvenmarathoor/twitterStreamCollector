@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import mongo.MongoDbConnector;
 import twitter.TwitterInfoLoader;
 
 import com.mongodb.MongoClient;
 
+import db.MongoDbConnector;
 import au.com.bytecode.opencsv.CSVReader;
 
 public class ExtractInformation {
