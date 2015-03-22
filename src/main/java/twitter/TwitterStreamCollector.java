@@ -72,15 +72,12 @@ public class TwitterStreamCollector {
 			count = count + keywordFilterCount;
 			DateTime now = DateTime.now();
 			DateTime endTime = now.plusSeconds(timeIntervalInSeconds);
-			/*for (String str : stringList) {
-				System.out.println("Keyword :" + str);
-			}*/
 			twitterStreamThread = new TwitterStreamThread(stringList,
 					twitterStream);
 			twitterStreamThread.start();
 			while (DateTime.now().isBefore(endTime) == true) {
 				try {
-					Thread.sleep(900 * timeIntervalInSeconds);
+					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -88,6 +85,17 @@ public class TwitterStreamCollector {
 
 			}
 			twitterStreamThread.cleanUpAndShutDown();
+			for (String value : stringList) {
+				Document doc = new Document(TwitterKeywords.TWITTER_KEYWORD_VALUE, value);
+				List<Document> docs = connector.find(doc, TwitterKeywords.TWITTER_KEYWORD_COLLECTION_NAME);
+				if (docs.size() > 0) {
+					doc.append(TwitterKeywords.LAST_RUN_TIME, now.toString());
+					connector.update(new Document(), doc, TwitterKeywords.TWITTER_KEYWORD_COLLECTION_NAME);	
+				} else {
+					//log information === not found
+				}
+				
+			}
 		}
 	}
 	

@@ -22,12 +22,12 @@ public class MongoDbConnector {
 		this.db = client.getDatabase(dbName);
 		
 	}
-	public boolean update(Document document, String collection) {
+	public boolean update(Document document, Document updatedDocument , String collection) {
 		if (document.containsKey("_id") == false) {
 			//throw new Exception("NO id found in document to update");
 			return false;
 		}else {
-			db.getCollection(collection).updateOne(document, document);
+			db.getCollection(collection).updateOne(document, updatedDocument);
 			return true;
 		}
 	}

@@ -28,7 +28,7 @@ public class TwitterInfoLoader {
 			if (docList != null && docList.size() > 0) {
 				System.out.println("info already exist");
 			} else {
-				InfoDocument document = new InfoDocument(val);
+				TwitterKeywordInfoDocument document = new TwitterKeywordInfoDocument(val);
 				System.out.println(document.getDocument().toString());
 				connector.insert(document.getDocument(), collectionName);
 			}
