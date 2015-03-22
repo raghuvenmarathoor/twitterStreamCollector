@@ -5,9 +5,6 @@ import java.util.List;
 
 import org.bson.Document;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
@@ -27,8 +24,6 @@ public class MongoDbConnector {
 			//throw new Exception("NO id found in document to update");
 			return false;
 		}else {
-			System.out.println(document.toString());
-			System.out.println(updatedDocument.toString());
 			Document updatingDocument = new Document("$set", updatedDocument);
 			db.getCollection(collection).updateOne(document, updatingDocument);
 			return true;
@@ -46,8 +41,7 @@ public class MongoDbConnector {
 		List<Document> docList = new ArrayList<Document>();	
 		MongoCursor<Document> cursor= db.getCollection(collection).find(search).iterator();
 		while(cursor.hasNext()) {
-			docList.add(cursor.next());
-			
+			docList.add(cursor.next());	
 		}
 		return docList;
 		}
