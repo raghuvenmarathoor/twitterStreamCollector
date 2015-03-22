@@ -60,7 +60,7 @@ public class TwitterStatusListenerMongoSave implements StatusListener {
 	}
 
 	public void onStatus(Status arg0) {
-		Document tweetDoc = TweetDocument.fromStatus(arg0).getDocument();
+		Document tweetDoc = Tweet.fromStatus(arg0).getDocument();
 		connector.insert(tweetDoc, "tweet_dump");
 	}
 

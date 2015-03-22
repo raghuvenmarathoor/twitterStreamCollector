@@ -15,7 +15,7 @@ public class TweetProcessor {
 	
 	
 	public void processTweet(Document document) {
-		processTweet(TweetDocument.fromDocument(document));
+		processTweet(Tweet.fromDocument(document));
 	}
 	
 	public void processTweets(List<Document> documents) {
@@ -23,7 +23,7 @@ public class TweetProcessor {
 			processTweet(document);
 		}
 	}
-	public void processTweet(TweetDocument document) {
+	public void processTweet(Tweet document) {
 		
 	}
 	

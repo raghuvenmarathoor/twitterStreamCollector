@@ -13,7 +13,7 @@ import twitter4j.HashtagEntity;
 import twitter4j.Status;
 import twitter4j.UserMentionEntity;
 
-public class TweetDocument {
+public class Tweet {
 	public static final String TWEET_FIELD_NAME = "tweet";
 	public static final String USER_ID_FIELD_NAME = "userId";
 	public static final String CONTRIBUTORS_FIELD_NAME = "contributors";
@@ -39,10 +39,10 @@ public class TweetDocument {
 	private String source = "";
 	private boolean processedStatus = false;
 
-	public TweetDocument() {
+	public Tweet() {
 		
 	}
-	public TweetDocument(String tweet, Long userId, List<Long> contributors,
+	public Tweet(String tweet, Long userId, List<Long> contributors,
 			List<String> hashtags, Date createdAt, Integer favouriteCount,
 			Long id, Long inReplyToUserId, Integer retweetCount,
 			List<Long> userMentions, String source, boolean processedStatus) {
@@ -240,8 +240,8 @@ public class TweetDocument {
 	public void setProcessedStatus(boolean processedStatus) {
 		this.processedStatus = processedStatus;
 	}
-    public static TweetDocument fromDocument(Document document) {
-    	TweetDocument tweetDocument = new TweetDocument();
+    public static Tweet fromDocument(Document document) {
+    	Tweet tweetDocument = new Tweet();
     	Set<String> keySet = document.keySet();
     	if (keySet.contains(CONTRIBUTORS_FIELD_NAME)) {
     		List<Long> contributors = (List<Long>) document.get(CONTRIBUTORS_FIELD_NAME);
@@ -302,7 +302,7 @@ public class TweetDocument {
     	document.append(USER_MENTIONS_FIELD_NAME, getUserMentions());
     	return document;
     }
-    public static TweetDocument fromStatus(Status status) {
+    public static Tweet fromStatus(Status status) {
     	Document tweetDoc = new Document();
 		tweetDoc.append(TWEET_FIELD_NAME, status.getText());
 		GeoLocation location =  status.getGeoLocation();
@@ -340,6 +340,6 @@ public class TweetDocument {
 		if (status.getSource()!= null) {
 			tweetDoc.put(SOURCE_FIELD_NAME , status.getSource());
 		}
-		return TweetDocument.fromDocument(tweetDoc);
+		return Tweet.fromDocument(tweetDoc);
     }
 }

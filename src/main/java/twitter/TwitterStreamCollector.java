@@ -92,7 +92,7 @@ public class TwitterStreamCollector {
 		this.twitterStream = new TwitterStreamFactory(builder.build()).getInstance();
 		this.twitterStream.addListener(new TwitterStatusListenerMongoSave(
 				this.connector, this));
-		this.twitterStream.addRateLimitStatusListener(new TwitterRateLimitStatusLimiter(this));
+		this.twitterStream.addRateLimitStatusListener(new TwitterRateLimitStatusListener(this));
 		this.twitterStream.addConnectionLifeCycleListener(new TwitterConnectionLifeCycleListener(this));
 	}
 
@@ -134,11 +134,13 @@ public class TwitterStreamCollector {
 			}
 			twitterStreamThread.cleanUpAndShutDown();
 			for (String value : stringList) {
-				Document doc = new Document(TwitterKeywordInfoDocument.VALUE_FIELD_NAME, value);
-				List<Document> docs = connector.find(doc, TwitterKeywordInfoDocument.TWITTER_KEYWORD_COLLECTION_NAME);
+				Document doc = new Document(SearchKeyword.VALUE_FIELD_NAME, value);
+				List<Document> docs = connector.find(doc, SearchKeyword.TWITTER_KEYWORD_COLLECTION_NAME);
 				if (docs.size() > 0) {
-					doc.append(TwitterKeywordInfoDocument.LAST_RUN_TIME_FIELD_NAME , now.toDate());
-					connector.update(new Document(), doc, TwitterKeywordInfoDocument.TWITTER_KEYWORD_COLLECTION_NAME);	
+					System.out.println("Adding runtime to value :" + value);
+					doc.append(SearchKeyword.LAST_RUN_TIME_FIELD_NAME , now.toDate());
+					Document searchQuery = new Document("_id",docs.get(0).get("_id"));
+					connector.update(searchQuery, doc, SearchKeyword.TWITTER_KEYWORD_COLLECTION_NAME);	
 				} else {
 					//log information === not found
 				}

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.bson.Document;
 
-public class TwitterUserStatusDocument {
+public class TwitterUser {
 
 	public static final String ID_FIELD_NAME = "_id";
 	public static final String POINTS_FIELD_NAME = "points";
@@ -91,8 +91,8 @@ public class TwitterUserStatusDocument {
 		document.append(USER_TYPE_FIELD_NAME, getUserType());
 		return document;
 	}
-	public static TwitterUserStatusDocument fromDocument(Document document) {
-		TwitterUserStatusDocument twitterUser = new TwitterUserStatusDocument();
+	public static TwitterUser fromDocument(Document document) {
+		TwitterUser twitterUser = new TwitterUser();
 		if (document.containsKey(ID_FIELD_NAME)) {
 			twitterUser.setId(document.getLong(ID_FIELD_NAME));
 		}

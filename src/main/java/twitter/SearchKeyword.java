@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.bson.Document;
 
-public class TwitterKeywordInfoDocument {
+public class SearchKeyword {
 
 	public static final String TWEET_COUNT_FIELD_NAME = "tweet_count";
 	public static final String ACTIVE_FIELD_NAME = "active";
@@ -22,14 +22,14 @@ public class TwitterKeywordInfoDocument {
 	public Date lastRunTime = null;
 	public int occurances = 0;
 
-	public TwitterKeywordInfoDocument(String value, boolean active, int tweetCount,
+	public SearchKeyword(String value, boolean active, int tweetCount,
 			Map<String, String> addInfo) {
 		this.val = value;
 		this.active = active;
 		this.tweetCount = tweetCount;
 		this.addInfo = addInfo;
 	}
-	public TwitterKeywordInfoDocument(String value, boolean active, int tweetCount, Map<String, String> addInfo, Date lastRunTime) {
+	public SearchKeyword(String value, boolean active, int tweetCount, Map<String, String> addInfo, Date lastRunTime) {
 		this.val = value;
 		this.active = active;
 		this.tweetCount = tweetCount;
@@ -37,11 +37,11 @@ public class TwitterKeywordInfoDocument {
 		this.lastRunTime = lastRunTime;
 	}
 
-	public TwitterKeywordInfoDocument(String value) {
+	public SearchKeyword(String value) {
 		this.val = value;
 	}
 
-	public TwitterKeywordInfoDocument(String value, boolean active) {
+	public SearchKeyword(String value, boolean active) {
 		this.val = value;
 		this.active = active;
 	}

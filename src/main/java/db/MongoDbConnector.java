@@ -27,7 +27,10 @@ public class MongoDbConnector {
 			//throw new Exception("NO id found in document to update");
 			return false;
 		}else {
-			db.getCollection(collection).updateOne(document, updatedDocument);
+			System.out.println(document.toString());
+			System.out.println(updatedDocument.toString());
+			Document updatingDocument = new Document("$set", updatedDocument);
+			db.getCollection(collection).updateOne(document, updatingDocument);
 			return true;
 		}
 	}

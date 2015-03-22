@@ -8,10 +8,10 @@ import misc.FileHandlingHelper;
 import twitter4j.RateLimitStatusEvent;
 import twitter4j.RateLimitStatusListener;
 
-public class TwitterRateLimitStatusLimiter implements RateLimitStatusListener{
+public class TwitterRateLimitStatusListener implements RateLimitStatusListener{
 	
 	TwitterStreamCollector collector;
-	public TwitterRateLimitStatusLimiter(TwitterStreamCollector collector) {
+	public TwitterRateLimitStatusListener(TwitterStreamCollector collector) {
 		this.collector = collector;
 	}
 
