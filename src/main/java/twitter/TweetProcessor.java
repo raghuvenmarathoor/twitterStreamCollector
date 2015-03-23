@@ -9,6 +9,7 @@ import db.MongoDbConnector;
 public class TweetProcessor {
 	
 	MongoDbConnector connector = null;
+	RankingConfiguration configuration = new RankingConfiguration();
 	public TweetProcessor (MongoDbConnector connector) {
 		this.connector = connector;
 	}
@@ -24,7 +25,7 @@ public class TweetProcessor {
 		}
 	}
 	public void processTweet(Tweet document) {
-		
+		Long userId = document.getUserId();
 	}
 	
 	
