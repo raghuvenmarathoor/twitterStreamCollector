@@ -3,7 +3,7 @@ twitterStream manipulation
 
 This is my test with twitterStream
 
-This is a private project.The idea is to create a candidate list of twitterusers by analysing tweets filtered by search keywords. There will be options to load twitterkeywords, save tweets, analyse tweets and users.
+This is a private project.The idea is to create a candidate list of twitterusers by analysing tweets filtered by search keywords. There will be options to load twitter keywords, save tweets, analyse tweets and users and recommend twitter users to follow. 
 
 achievements
 1. multiple twitter accounts
