@@ -20,12 +20,13 @@ public class Tweet {
 	public static final String HASHTAGS_FIELD_NAME = "hashtags";
 	public static final String CREATED_AT_FIELD_NAME = "createdAt";
 	public static final String FAVOURITE_COUNT_FIELD_NAME = "favouriteCount";
-	public static final String ID_FIELD_NAME_FIELD_NAME = "id";
+	public static final String ID_FIELD_NAME_FIELD_NAME = "_id";
 	public static final String IN_REPLY_TO_USER_ID = "inreplyToUserId";
 	public static final String RETWEET_COUNT_FIELD_NAME = "retweetCount";
 	public static final String USER_MENTIONS_FIELD_NAME = "userMentions";
 	public static final String SOURCE_FIELD_NAME = "source";
 	public static final String PROCESSED_STATUS_FIELD_NAME = "processed";
+	public static final String TABLE_NAME = "tweet_dump";
 	private String tweet = "";
 	private Long userId = -1l;
 	private List<Long> contributors = new ArrayList<Long>();

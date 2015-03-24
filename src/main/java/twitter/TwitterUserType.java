@@ -34,5 +34,8 @@ public class TwitterUserType {
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
+	public String toString() {
+		return userType;
+	}
 	
 }

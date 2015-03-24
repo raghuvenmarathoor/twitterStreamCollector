@@ -5,17 +5,36 @@ import java.util.List;
 
 import org.bson.Document;
 
-public class TwitterUser {
+import core.Documentable;
+
+public class TwitterUser implements Documentable {
 
 	public static final String ID_FIELD_NAME = "_id";
 	public static final String POINTS_FIELD_NAME = "points";
 	public static final String USER_TYPE_FIELD_NAME = "usertype";
-	public static final String USER_DEVICE_TYPES = "userPostingMethod";
+	public static final String USER_DEVICE_TYPES = "devices";
+	public static final String USER_TABLE_NAME = "users";
+	public static final String INFO_STATUS_FIELD_NAME = "infostatus";
 	private Long id = -1l;
 	private Long points = 0l;
 	private TwitterUserType userType = new TwitterUserType();
 	private List<String> deviceTypes = new ArrayList<String>();
+	private boolean infostatus = false;
 	
+	
+	
+	/**
+	 * @return the infostatus
+	 */
+	public boolean isInfostatus() {
+		return infostatus;
+	}
+	/**
+	 * @param infostatus the infostatus to set
+	 */
+	public void setInfostatus(boolean infostatus) {
+		this.infostatus = infostatus;
+	}
 	/**
 	 * @return the id
 	 */
@@ -88,9 +107,11 @@ public class TwitterUser {
 		document.append(ID_FIELD_NAME, getId());
 		document.append(POINTS_FIELD_NAME, getPoints());
 		document.append(USER_DEVICE_TYPES, getPostingMethod());
-		document.append(USER_TYPE_FIELD_NAME, getUserType());
+		document.append(USER_TYPE_FIELD_NAME, getUserType().toString());
+		document.append(INFO_STATUS_FIELD_NAME, isInfostatus());
 		return document;
 	}
+	
 	public static TwitterUser fromDocument(Document document) {
 		TwitterUser twitterUser = new TwitterUser();
 		if (document.containsKey(ID_FIELD_NAME)) {
@@ -104,6 +125,9 @@ public class TwitterUser {
 		}
 		if (document.containsKey(USER_TYPE_FIELD_NAME)) {
 			twitterUser.setUserType(document.getString(USER_TYPE_FIELD_NAME));
+		}
+		if (document.containsKey(INFO_STATUS_FIELD_NAME)) {
+			twitterUser.setInfostatus(document.getBoolean(INFO_STATUS_FIELD_NAME));
 		}
 		return twitterUser;
 	}

@@ -64,6 +64,9 @@ public class MongoDbConnector {
 			} else {
 				updatingDocument = updatedDocument;
 			}
+			if (updatingDocument.containsKey("_id")) {
+				updatingDocument.remove("_id");
+			}
 			db.getCollection(collection).updateOne(document, updatingDocument);
 			return true;
 		}
