@@ -29,13 +29,29 @@ public class TwitterStatusListenerMongoSave implements StatusListener {
 		// TODO Auto-generated method stub
 		arg0.printStackTrace();
 		System.out.println("ON EXCEPTION");
+		try {
 		TwitterException twitterException = (TwitterException) arg0;
+		handleTwitterException(twitterException);
+		} catch (ClassCastException classCastException) {
+			handleOtherExceptions(arg0);
+		}
+		
+		
+	}
+	
+	private void handleOtherExceptions(Exception exception) {
+		System.out.println("waiting 100 seconds");
+		collector.setNextTwitterAccount();
+		collector.stopAndWait(100);
+	}
+	private void handleTwitterException(TwitterException twitterException) {
 		int retryAfterSeconds = twitterException.getRetryAfter();
 		System.out.println(String.valueOf(retryAfterSeconds));
 		if (retryAfterSeconds > 0) {
 			collector.stopAndWait(retryAfterSeconds);
 		}
 		int errorCode = twitterException.getStatusCode();
+		System.out.println("Twitter Exception status code :" + String.valueOf(errorCode));
 		if (errorCode == 420) {
 			System.out.println("ErrorCode 420");
 			collector.setNextTwitterAccount();

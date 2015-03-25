@@ -8,6 +8,8 @@ import org.bson.Document;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.UpdateResult;
 
 public class MongoDbConnector {
 	MongoClient client = null;
@@ -40,7 +42,7 @@ public class MongoDbConnector {
 	/**
 	 * same as update function, but with replace option
 	 * 
-	 * @param document
+	 * @param searchQuery
 	 *            - search query (A document with _id mandatory)
 	 * @param updatedDocument
 	 *            - document to update
@@ -51,24 +53,24 @@ public class MongoDbConnector {
 	 *            - replace or not boolean
 	 * @return -success status
 	 */
-	public boolean update(Document document, Document updatedDocument,
+	public boolean update(Document searchQuery, Document updatedDocument,
 			String collection, boolean replace) {
 
-		if (document.containsKey("_id") == false) {
-			// throw new Exception("NO id found in document to update");
-			return false;
+		Document updatingDocument;
+		if (replace == false) {
+			updatingDocument = new Document("$set", updatedDocument);
 		} else {
-			Document updatingDocument;
-			if (replace == false) {
-				updatingDocument = new Document("$set", updatedDocument);
-			} else {
-				updatingDocument = updatedDocument;
-			}
-			if (updatingDocument.containsKey("_id")) {
-				updatingDocument.remove("_id");
-			}
-			db.getCollection(collection).updateOne(document, updatingDocument);
+			updatingDocument = updatedDocument;
+		}
+		if (updatingDocument.containsKey("_id")) {
+			updatingDocument.remove("_id");
+		}
+		UpdateResult result = db.getCollection(collection).updateOne(
+				searchQuery, updatingDocument);
+		if (result.getModifiedCount() > 0) {
 			return true;
+		} else {
+			return false;
 		}
 
 	}
@@ -112,4 +114,12 @@ public class MongoDbConnector {
 		return null;
 	}
 
+	public boolean remove(Document query, String collection) {
+		DeleteResult result = db.getCollection(collection).deleteOne(query);
+		if (result.getDeletedCount() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

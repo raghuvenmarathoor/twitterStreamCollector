@@ -91,7 +91,7 @@ public class TweetProcessor {
 		MongoClient client = new MongoClient();
 		MongoDbConnector connector = new MongoDbConnector(client, "mydb");
 		TweetProcessor processor = new TweetProcessor(connector);
-		Document query = new Document(Tweet.PROCESSED_STATUS_FIELD_NAME, new Document("$exists", 0));
+		Document query = new Document(Tweet.PROCESSED_STATUS_FIELD_NAME, false);
 		List<Document> docs = connector.find(query, Tweet.TABLE_NAME);
 		processor.processTweets(docs);
 	}

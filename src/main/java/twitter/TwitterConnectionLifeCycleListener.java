@@ -45,7 +45,7 @@ public class TwitterConnectionLifeCycleListener implements ConnectionLifeCycleLi
 			
 		}*/
 		
-		FileHandlingHelper.saveToFile("\nON CONNECT" + DateTime.now().toString() , new File("log.txt"));
+		//FileHandlingHelper.saveToFile("\nON CONNECT" + DateTime.now().toString() , new File("log.txt"));
 	}
 
 	public void onDisconnect() {
@@ -55,7 +55,7 @@ public class TwitterConnectionLifeCycleListener implements ConnectionLifeCycleLi
 
 	public void onCleanUp() {
 		// TODO Auto-generated method stub
-		FileHandlingHelper.saveToFile("\nCLEAN UP", new File("log.txt"));
+		//FileHandlingHelper.saveToFile("\nCLEAN UP", new File("log.txt"));
 	}
 
 }
